@@ -5,8 +5,8 @@
 // Main Concept: Adapter Design Pattern
 
 // In this pattern, we create an adapter class that allows
-// incompatible interfaces to work together. The adapter acts as a bridge
-// between two incompatible interfaces.
+// incompatible interfaces or types to work together.
+// The adapter acts as a bridge between two incompatible interfaces.
 
 namespace AdapterDP
 {
@@ -19,6 +19,7 @@ namespace AdapterDP
 
     
     // Legacy class with a different method signature
+    // Adaptee
     public class OldPrinter
     {
         public void PrintText(string text)
@@ -55,18 +56,18 @@ namespace AdapterDP
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("---------------------------------");
-            Console.WriteLine("Adapter Design Pattern in C#.NET.");
-            Console.WriteLine("---------------------------------\n");
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("The Adapter Design Pattern in C#.NET.");
+            Console.WriteLine("-------------------------------------\n");
 
             
             // Using the adapter to make OldPrinter compatible with INewPrinter
             INewPrinter printer = new PrinterAdapter(new OldPrinter());
 
-            // In fact, we are calling the OldPrinter's PrintText() method via the adapter's Print() method.
-            // The adapter class has implemented the INewPrinter interface.
+            // In fact, we are calling the OldPrinter's PrintText() method via the adapter's Print() method.            
             // There, we are using the new print method, but internally it calls the old print method.
             // It seems that the new printer is backward compatible with the old printer.
+            // The client thinks it is using a modern printer.
             printer.Print("Hello from Adapter Pattern!");
 
             
