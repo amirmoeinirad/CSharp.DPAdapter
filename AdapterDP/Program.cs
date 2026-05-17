@@ -2,16 +2,15 @@
 // Amir Moeini Rad
 // September 2025
 
-// Main Concept: Adapter Design Pattern
+// Main Concept: The Adapter Design Pattern
 
 // In this pattern, we create an adapter class that allows
 // incompatible interfaces or types to work together.
-// The adapter acts as a bridge between two incompatible interfaces.
 
 namespace AdapterDP
 {
 
-    // Target interface expected by the new system
+    // New Interface
     public interface INewPrinter
     {
         void Print(string message);
@@ -19,7 +18,6 @@ namespace AdapterDP
 
     
     // Legacy class with a different method signature
-    // Adaptee
     public class OldPrinter
     {
         public void PrintText(string text)
@@ -27,9 +25,6 @@ namespace AdapterDP
             Console.WriteLine("Old Printer: " + text);
         }
     }
-
-
-    /////////////////////////////////////////////////
 
 
     // Adapter class that makes OldPrinter compatible with INewPrinter
@@ -44,12 +39,10 @@ namespace AdapterDP
 
         public void Print(string message)
         {
+            Console.WriteLine("In Printer Adapter...");
             _oldPrinter.PrintText(message); // adapting the call
         }
     }
-
-    
-    /////////////////////////////////////////////////
     
 
     internal class Program
@@ -59,17 +52,12 @@ namespace AdapterDP
             Console.WriteLine("-------------------------------------");
             Console.WriteLine("The Adapter Design Pattern in C#.NET.");
             Console.WriteLine("-------------------------------------\n");
-
-            
-            // Using the adapter to make OldPrinter compatible with INewPrinter
+                        
             INewPrinter printer = new PrinterAdapter(new OldPrinter());
 
-            // In fact, we are calling the OldPrinter's PrintText() method via the adapter's Print() method.            
-            // There, we are using the new print method, but internally it calls the old print method.
-            // It seems that the new printer is backward compatible with the old printer.
-            // The client thinks it is using a modern printer.
+            // In fact, we are calling the OldPrinter's PrintText() method via the adapter's Print() method.                        
+            // It seems that the new printer is backward compatible with the old printer.            
             printer.Print("Hello from Adapter Pattern!");
-
             
             Console.WriteLine("\nDone.");
         }
